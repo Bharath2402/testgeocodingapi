@@ -1,0 +1,71 @@
+[testdata]
+# Postive tests
+[[GeoCodePostiveCases]]
+
+    TestDesc = "Reverse geocoding - Bangalore Office"
+    Lattitude = "12.970500262267725"
+    Longtitude = "77.63771123358454"
+    StatusCode = 200
+    RespFullAddress = "1073, 11th Main Rd, HAL 2nd Stage, Appareddipalya, Indiranagar, Bengaluru, Karnataka 560038, India"
+    RespLocality = "Bengaluru"
+    RespCountry = "India"
+    RespPinCode = "560038"
+    RespBodyStatus = "OK"
+
+# Negative tests
+[[GeoCodeNegativeCases]]
+
+    TestDesc = "Empty lattitude parameter"
+    Lattitude = ""
+    Longtitude = "77.63771123358454"
+    StatusCode = 400
+    RespStatus = "INVALID_REQUEST"
+    RespError = "Invalid request. Invalid 'latlng' parameter."
+
+[[GeoCodeNegativeCases]]
+
+    TestDesc = "Empty longtitude parameter"
+    Lattitude = "12.970500262267725"
+    Longtitude = ""
+    StatusCode = 400
+    RespStatus = "INVALID_REQUEST"
+    RespError = "Invalid request. Invalid 'latlng' parameter."
+
+[[GeoCodeNegativeCases]]
+
+    TestDesc = "Invalid longtitude parameter"
+    Lattitude = "12.970500262267725"
+    Longtitude = "asd"
+    StatusCode = 400
+    RespStatus = "INVALID_REQUEST"
+    RespError = "Invalid request. Invalid 'latlng' parameter."
+
+[[GeoCodeNegativeCases]]
+
+    TestDesc = "Invalid lattitude parameter"
+    Lattitude = "asd"
+    Longtitude = "77.63771123358454"
+    StatusCode = 400
+    RespStatus = "INVALID_REQUEST"
+    RespError = "Invalid request. Invalid 'latlng' parameter."
+
+# Negative tests - API Key
+[[GeoCodeNegativekeyCases]]
+
+    TestDesc = "Empty API key"
+    Lattitude = "12.970500262267725"
+    Longtitude = "77.63771123358454"
+    ApiKey = ""
+    StatusCode = 200
+    RespStatus = "REQUEST_DENIED"
+    RespError = "You must use an API key to authenticate each request to Google Maps Platform APIs. For additional information, please refer to http://g.co/dev/maps-no-account"
+
+[[GeoCodeNegativekeyCases]]
+
+    TestDesc = "Invalid API key"
+    Lattitude = "12.970500262267725"
+    Longtitude = "77.63771123358454"
+    ApiKey = "invalid_random_key"
+    StatusCode = 200
+    RespStatus = "REQUEST_DENIED"
+    RespError = "The provided API key is invalid. "
