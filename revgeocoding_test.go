@@ -18,6 +18,7 @@ func TestRevGeoCodingPositive(t *testing.T) {
 
 		testObject := config.GeoCodePostiveCases[i]
 		fmt.Println("Running positive scenario -> " + testObject.TestDesc)
+
 		// Make latlng query
 		latlngValue, err := util.MakeLatlngString(testObject.Lattitude, testObject.Longtitude)
 		if err != nil {
@@ -53,11 +54,12 @@ func TestRevGeoCodingPositive(t *testing.T) {
 
 func TestRevGeoCodingNegativeCases(t *testing.T) {
 	e := httpexpect.New(t, host)
-	// Invalid latlag parameters
+	// Invalid latlag scenarios
 	for i := 0; i < len(config.GeoCodeNegativeCases); i++ {
 
 		testObject := config.GeoCodeNegativeCases[i]
 		fmt.Println("Running negative scenario -> " + testObject.TestDesc)
+
 		// Make latlng query
 		latlngValue, err := util.MakeLatlngString(testObject.Lattitude, testObject.Longtitude)
 		if err != nil {
@@ -74,7 +76,7 @@ func TestRevGeoCodingNegativeCases(t *testing.T) {
 		resp.ValueEqual("error_message", testObject.RespError)
 	}
 
-	// invalid api key
+	// invalid api key scenarios
 	for i := 0; i < len(config.GeoCodeNegativekeyCases); i++ {
 
 		testObject := config.GeoCodeNegativekeyCases[i]
