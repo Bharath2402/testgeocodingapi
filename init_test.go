@@ -3,6 +3,7 @@ package testgeocodingapi
 import (
 	"io/ioutil"
 	"log"
+	"strings"
 	"testgeocodingapi/data"
 	"testgeocodingapi/model"
 	"testing"
@@ -30,7 +31,7 @@ func TestMain(m *testing.M) {
 	host = data.Url
 	apiKey = data.GeoApikey
 
-	if len(apiKey) == 0 {
+	if len(strings.TrimSpace(apiKey)) == 0 {
 		log.Fatalf("Please enter a  API key and run the tests")
 	}
 
