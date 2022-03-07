@@ -5,6 +5,7 @@ import (
 	"log"
 	"net/http"
 	"testgeocodingapi/model"
+	"testgeocodingapi/schema"
 	"testgeocodingapi/util"
 	"testing"
 
@@ -48,6 +49,9 @@ func TestRevGeoCodingPositive(t *testing.T) {
 
 		fullResp.Value("results").Array().Element(0).Object().
 			ValueEqual("formatted_address", testObject.RespFullAddress)
+
+		// Schema validation
+		fullResp.Keys().Schema(schema.GeocodeRespPositive)
 	}
 
 }
@@ -74,6 +78,9 @@ func TestRevGeoCodingNegativeCases(t *testing.T) {
 			Status(testObject.StatusCode).JSON().Object()
 		resp.ValueEqual("status", testObject.RespStatus)
 		resp.ValueEqual("error_message", testObject.RespError)
+
+		// Schema validation
+		resp.Schema(schema.GeocodeRespNegative)
 	}
 
 	// invalid api key scenarios
@@ -95,6 +102,9 @@ func TestRevGeoCodingNegativeCases(t *testing.T) {
 			Status(testObject.StatusCode).JSON().Object()
 		resp.ValueEqual("status", testObject.RespStatus)
 		resp.ValueEqual("error_message", testObject.RespError)
+
+		// Schema validation
+		resp.Schema(schema.GeocodeRespNegative)
 	}
 
 }
